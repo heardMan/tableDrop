@@ -1,0 +1,24 @@
+#tableDrop{
+    height:300px;
+    width:300px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: aqua;
+    z-index: 100;
+}
+
+table {
+    table-layout: fixed;
+    width: 20%;
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    
+}
+td {
+    text-align: center;
+    padding: 0px;
+
+}
