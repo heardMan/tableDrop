@@ -1,24 +1,42 @@
-#tableDrop{
+#fileDropZone{
+    position: relative;
     height:300px;
     width:300px;
     margin-right: auto;
     margin-left: auto;
-    background-color: aqua;
+    background-color: #e4e9ed;
+    border: dashed #bdc3c7 5px;
+    border-radius: 10px;
     z-index: 100;
 }
 
+#fileDropZone img {
+    position: absolute;
+    width:50%;
+    top:20%;
+    left:25%;
+}
+
+#fileDropZone p {
+    position: absolute;
+    top:80%;
+    left:18%;
+    text-align: center;
+}
+
+
+
 table {
     table-layout: fixed;
-    width: 20%;
-    width: 60%;
+    
     margin-right: auto;
     margin-left: auto;
     border-collapse: collapse;
     border-spacing: 0;
     
 }
+
 td {
     text-align: center;
-    padding: 0px;
-
+    padding: 0.5rem 1rem 0.5rem 1rem;
 }
