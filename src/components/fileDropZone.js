@@ -22,23 +22,31 @@ const TableDrop = () => {
 
             if (item.kind === 'file') {
 
-                console.log("file detected");
-                const file = item.getAsFile();
-
-                const reader = new FileReader();
-                reader.onload = function (evt) {
-                    console.log(parseCSV(evt.target.result));
-                    return setData(parseCSV(evt.target.result))
-                };
-                reader.readAsText(file);
                 
+                if (item.type === 'text/csv') {
+                    console.log("CSV file detected");
+                    const file = item.getAsFile();
 
-            }
+                    const reader = new FileReader();
+                    reader.onload = event => {
+                        const csvFile = readCSV(event.target.result);
+                        return setData(csvFile);
+                    };
+                    reader.readAsText(file);
+
+                } else if (item.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+                    console.log("XLSX file detected");
+                } else {
+                    console.log(item);
+                    console.log("The only file types cureenty supported are:\n.csv")
+                }
+
+            } 
         }
 
     }
 
-    const parseCSV = (payload) => {
+    const readCSV = (payload) => {
 
         let rows = payload.split('\n');
         let cols = rows[0].split(',');
