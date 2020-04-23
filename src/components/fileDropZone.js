@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import fileIcon from "../../public/icons/cloud_upload-white-24dp.svg"
+import { func } from "prop-types";
 
 const TableDrop = () => {
 
@@ -14,16 +15,24 @@ const TableDrop = () => {
         e.preventDefault();
         //access the first item of the list
         const item = e.dataTransfer.items['0'];
-        
+
         if (item) {
+
+            console.log("item dropped");
+
             if (item.kind === 'file') {
-                const file = item.getAsFile()
-                if (item.type === 'text/csv') {
-                    file.text()
-                        .then((fileData) => {
-                            return setData(parseCSV(fileData));
-                        });
-                }
+
+                console.log("file detected");
+                const file = item.getAsFile();
+
+                const reader = new FileReader();
+                reader.onload = function (evt) {
+                    console.log(parseCSV(evt.target.result));
+                    return setData(parseCSV(evt.target.result))
+                };
+                reader.readAsText(file);
+                
+
             }
         }
 
@@ -56,27 +65,27 @@ const TableDrop = () => {
     return (
         <div>
 
-            <div 
-              id='fileDropZone' 
-              onDragOver={dragOverHandler} 
-              onDrop={dropHandler}>
-                  <img src={fileIcon}/>
-                  <p>Drop file on this square</p>
+            <div
+                id='fileDropZone'
+                onDragOver={dragOverHandler}
+                onDrop={dropHandler}>
+                <img alt="cloud upload icon" src={fileIcon} />
+                <p>Drop file on this square</p>
             </div>
 
             <div id="data">
                 <table>
                     <tbody>
-                {data.map((item,i)=>{
-                    console.log(item)
-                    return(<tr key={i}>
-                        {Object.keys(item).map((prop,j)=>{
-                            return(<td key={j}>{item[prop]}</td>)
+                        {data.map((item, i) => {
+                            console.log(item)
+                            return (<tr key={i}>
+                                {Object.keys(item).map((prop, j) => {
+                                    return (<td key={j}>{item[prop]}</td>)
+                                })}
+                            </tr>)
+
                         })}
-                    </tr>)
-                    
-                })}
-                </tbody>
+                    </tbody>
                 </table>
             </div>
 
