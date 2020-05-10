@@ -19,12 +19,13 @@ const TableDrop = () => {
         if (item) {
 
             console.log("item dropped");
+            console.log(item);
 
             if (item.kind === 'file') {
 
                 
-                if (item.type === 'text/csv') {
-                    console.log("CSV file detected");
+                //if (item.type === 'text/csv') {
+                    //console.log("CSV file detected");
                     const file = item.getAsFile();
 
                     const reader = new FileReader();
@@ -34,12 +35,13 @@ const TableDrop = () => {
                     };
                     reader.readAsText(file);
 
-                } else if (item.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
-                    console.log("XLSX file detected");
-                } else {
-                    console.log(item);
-                    console.log("The only file types cureenty supported are:\n.csv")
-                }
+                // } else if (item.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+                //     //console.log(item.getAsFile.);
+                //     console.log("XLSX file detected");
+                // } else {
+                //     console.log(item.type);
+                //     console.log("The only file types cureenty supported are:\n.csv")
+                // }
 
             } 
         }
